@@ -1,0 +1,24 @@
+[
+    {
+      "name": "AK-47 | Redline",
+      "weapon": "AK-47",
+      "collection": "Phoenix",
+      "rarity": "Classified",
+      "color": "Red"
+    },
+    {
+      "name": "AK-47 | Inheritance",
+      "weapon": "AK-47",
+      "collection": "Kilowatt",
+      "rarity": "Covert",
+      "color": "White"
+    },
+    {
+      "name": "AWP | Dragon Lore",
+      "weapon": "AWP",
+      "collection": "Cobblestone",
+      "rarity": "Covert",
+      "color": "Gold"
+    }
+  ]
+  
