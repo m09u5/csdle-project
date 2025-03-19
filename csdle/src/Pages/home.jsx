@@ -15,6 +15,10 @@ export function HomePage(){
             <img src="src/assets/noimage.png" alt="" />
             <Link to="/skinbook">Skinbook</Link>
          </div>
+         <div class= "homepagelinks">
+            <img src="src/assets/noimage.png" alt="" />
+            <Link to="/test">test</Link>
+         </div>
         </>
       )
 }
