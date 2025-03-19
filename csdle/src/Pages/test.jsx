@@ -3,18 +3,20 @@ import GuessBox from '../components/guessbox';
 
 
 export function Test() {
-    const selectedSkin = skins[0];
+    const randomValue = Math.floor(Math.random() * 3);
+    console.log(randomValue);
+    const selectedSkin = skins[randomValue];
     return(
         <>
-            <div>
+            <tr>
                 {
                     Object.entries(selectedSkin).map(([key, value]) => (
-                        <p key = {key} >
+                        <td key = {key} >
                             <GuessBox content= {value}/>
-                        </p>
+                        </td>
                     ))
                 }
-            </div>
+            </tr>
         </>
     )
 }
