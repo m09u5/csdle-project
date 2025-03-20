@@ -2,17 +2,15 @@ import skins from '../assets/skins.json'
 import GuessBox from '../components/guessbox';
 
 
-export function Test() {
-    const randomValue = Math.floor(Math.random() * 3);
-    console.log(randomValue);
-    const selectedSkin = skins[randomValue];
+export function Test({playersAnswer}) {
+    const selectedSkin = skins[0];
     return(
         <>
             <tr>
                 {
                     Object.entries(selectedSkin).map(([key, value]) => (
                         <td key = {key} >
-                            <GuessBox content= {value}/>
+                            <GuessBox playersAnswer={playersAnswer} answer={value}/>
                         </td>
                     ))
                 }
