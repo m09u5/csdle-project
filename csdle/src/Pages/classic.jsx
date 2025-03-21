@@ -4,18 +4,28 @@ import { Table, TableBody, TableContainer, TableCell } from '@mui/material';
 import { Test } from './test';
 
 export function ClassicMode() {
-    console.log(skins)
     const [playersAnswer, setPlayersAnswer] = useState("AK-47 | Redline");
     //const checkGuess = () => {
      //   if (skins.find(skin => skin.name == playersAnswer)){console.log("cool skin")} 
      //   else {console.log("not cool skin")};
    // }
    const [showAnswer, setShowAnswer] = useState(false);
+   const findSkinByName = (name) => {
+       return skins.find(skin => skin.name === name);
+    };
+    const foundSkin = findSkinByName(playersAnswer);
+    console.log("found skin:", foundSkin);
     const checkGuess = (e) => {
         e.preventDefault();
         setShowAnswer(true);
     }
-    console.log(playersAnswer)
+    const checkAnswer = () => {
+        if ((foundSkin) === selectedSkin) {
+            console.log("Correct skin");
+        } else {
+            console.log("nt Correct skin");
+        }
+    }
     return(
         <>
             <div>
@@ -34,8 +44,8 @@ export function ClassicMode() {
                             <TableCell><Test playersAnswer={playersAnswer}/></TableCell>
                         </TableBody>
                     </Table>
-                </TableContainer>)}
-
+                </TableContainer>)
+                }
             </div>
         </>
     )
