@@ -2,19 +2,20 @@ import skins from '../assets/skins.json'
 import GuessBox from '../components/guessbox';
 
 
-export function Test({playersAnswer}) {
-    const selectedSkin = skins[0];
+export function Test({foundSkin, answer}) {
     return(
         <>
-            <tr>
-                {
-                    Object.entries(selectedSkin).map(([key, value]) => (
-                        <td key = {key} >
-                            <GuessBox playersAnswer={playersAnswer} answer={value}/>
-                        </td>
-                    ))
-                }
-            </tr>
+            {
+                foundSkin.map(skin => (
+                    <tr key={skin.id}>
+                        {Object.entries(skin).map(([key, value]) => (
+                            <td key={key}>
+                                <GuessBox foundSkin={value} answer={answer[key]}/>
+                            </td>
+                        ))}
+                    </tr>
+                ))
+            }
         </>
     )
 }
