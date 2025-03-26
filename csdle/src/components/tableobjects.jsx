@@ -1,8 +1,7 @@
-import skins from '../assets/skins.json'
-import GuessBox from '../components/guessbox';
+import GuessBox from './guessbox';
 
 
-export function Test({foundSkin, answer}) {
+export function TableObjects({foundSkin, answer}) {
     return(
         <>
             {

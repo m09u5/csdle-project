@@ -1,7 +1,7 @@
 import skins from '../assets/skins.json'
 import { useState } from 'react'
 import { Table, TableBody, TableContainer, TableCell, TableRow } from '@mui/material';
-import { Test } from './test';
+import { TableObjects } from '../components/tableobjects';
 
 export function ClassicMode() {
     const suggetions = skins.map(skin => skin.name);
@@ -34,26 +34,39 @@ export function ClassicMode() {
                         placeholder="Take a guess"
                         onFocus={() => setFocused(true)}
                     />
+                    <button type="submit">Submit</button>
                     {focused &&
-                    <div className='shadow-lg'>
+                    <ul className='list'>
                         {suggetions.map((suggetion, index) => {
                             const isMatch = suggetion.toLowerCase().indexOf(playersAnswer.toLowerCase()) > -1;
                             return <div key={index}>
                                 {isMatch &&(
-                                    <div onClick={() => setPlayersAnswer(suggetion)}>
+                                    <li className="list.item"onClick={(e) => {
+                                        setFoundSkin(newFoundSkin(suggetion));
+                                        checkGuess(e);
+                                        setPlayersAnswers([...playersAnswers, newFoundSkin(suggetion)]);
+                                        }}>
                                     {suggetion}
-                                </div>
+                                </li>
                                 )}
                             </div>
                             })} 
-                    </div>
+                    </ul>
                     }
-                    <button type="submit">Submit</button>
                 </form>
                 {showAnswer &&
                 (<table>
+                        <thead>
+                            <tr>
+                                {Object.keys(selectedSkin).map(key => (
+                                    <th key={key}>
+                                        {key}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
                         <tbody>
-                                <Test foundSkin={playersAnswers} answer={selectedSkin}/>
+                                <TableObjects foundSkin={playersAnswers} answer={selectedSkin}/>
                         </tbody>
                     </table>)
                 }
