@@ -1,10 +1,11 @@
 import skins from '../assets/skins.json'
-import { useState } from 'react'
-import { Table, TableBody, TableContainer, TableCell, TableRow } from '@mui/material';
+import { useState, useEffect } from 'react'
 import { TableObjects } from '../components/tableobjects';
+import { GameWinPopup } from '../components/gamewinpopup';
 
 export function ClassicMode() {
-    const suggetions = skins.map(skin => skin.name);
+    const [suggestions, setSuggestions] = useState(skins.map(skin => skin.name));
+    const [timedPopup, setTimedPopup] = useState(false);
     const [focused, setFocused] = useState(false);
     const [playersAnswer, setPlayersAnswer] = useState("");
     const selectedSkin = skins[0];
@@ -18,15 +19,26 @@ export function ClassicMode() {
         e.preventDefault();
         setShowAnswer(true);
     }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!suggestions.includes(playersAnswer)) return; 
+        setFoundSkin(newFoundSkin(playersAnswer));
+        checkGuess(e);
+        setPlayersAnswers([...playersAnswers, newFoundSkin(playersAnswer)]);
+        setSuggestions(suggestions.filter(suggestion => suggestion !== playersAnswer));
+        setPlayersAnswer("");
+    }
+    useEffect(() => {
+        if (foundSkin && foundSkin.name === selectedSkin.name) {
+            setTimeout(() => {
+                setTimedPopup(true);
+            }, 3000);
+        }
+    }, [foundSkin]);
     return(
         <>
             <div>
-                <form onSubmit={(e) => {
-                    setFoundSkin(newFoundSkin(playersAnswer));
-                    checkGuess(e);
-                    setPlayersAnswers([...playersAnswers, newFoundSkin(playersAnswer)]);
-
-                    }}>
+                <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         value={playersAnswer}
@@ -37,16 +49,17 @@ export function ClassicMode() {
                     <button type="submit">Submit</button>
                     {focused &&
                     <ul className='list'>
-                        {suggetions.map((suggetion, index) => {
-                            const isMatch = suggetion.toLowerCase().indexOf(playersAnswer.toLowerCase()) > -1;
+                        {suggestions.map((suggestion, index) => {
+                            const isMatch = suggestion.toLowerCase().indexOf(playersAnswer.toLowerCase()) > -1;
                             return <div key={index}>
                                 {isMatch &&(
                                     <li className="list.item"onClick={(e) => {
-                                        setFoundSkin(newFoundSkin(suggetion));
+                                        setFoundSkin(newFoundSkin(suggestion));
                                         checkGuess(e);
-                                        setPlayersAnswers([...playersAnswers, newFoundSkin(suggetion)]);
+                                        setPlayersAnswers([...playersAnswers, newFoundSkin(suggestion)]);
+                                        setSuggestions(suggestions.filter(s => s !== suggestion));
                                         }}>
-                                    {suggetion}
+                                    {suggestion}
                                 </li>
                                 )}
                             </div>
@@ -71,6 +84,10 @@ export function ClassicMode() {
                     </table>)
                 }
             </div>
+            <GameWinPopup trigger={timedPopup} setTrigger={setTimedPopup}>
+                <h1>Congratulations!</h1>
+                <p>You found the skin: {selectedSkin.name}</p>
+            </GameWinPopup>
         </>
     )
 }
