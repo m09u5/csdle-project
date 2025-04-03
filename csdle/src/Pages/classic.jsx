@@ -2,6 +2,7 @@ import skins from '../assets/skins.json'
 import { useState, useEffect } from 'react'
 import { TableObjects } from '../components/tableobjects';
 import { GameWinPopup } from '../components/gamewinpopup';
+import '../assets/styles.css'
 
 export function ClassicMode() {
     const [suggestions, setSuggestions] = useState(skins.map(skin => skin.name));
@@ -19,6 +20,7 @@ export function ClassicMode() {
         e.preventDefault();
         setShowAnswer(true);
     }
+    const date = new Date();
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!suggestions.includes(playersAnswer)) return; 
@@ -30,11 +32,19 @@ export function ClassicMode() {
     }
     useEffect(() => {
         if (foundSkin && foundSkin.name === selectedSkin.name) {
+            localStorage.setItem(date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay(), "true");
             setTimeout(() => {
                 setTimedPopup(true);
             }, 3000);
         }
     }, [foundSkin]);
+    useEffect(() => {        
+        if (localStorage.getItem(date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay()) === "true") {
+        setTimeout(() => {
+            setTimedPopup(true);
+        }, 1000);
+        }
+    }, []);
     return(
         <>
             <div>
@@ -71,6 +81,7 @@ export function ClassicMode() {
                 (<table>
                         <thead>
                             <tr>
+                                <th>image</th>
                                 {Object.keys(selectedSkin).map(key => (
                                     <th key={key}>
                                         {key}

@@ -1,24 +1,47 @@
 [
-    {
-      "name": "AK-47 | Redline",
-      "weapon": "AK-47",
-      "collection": "Phoenix",
-      "rarity": "Classified",
-      "color": "Red"
-    },
-    {
-      "name": "AK-47 | Inheritance",
-      "weapon": "AK-47",
-      "collection": "Kilowatt",
-      "rarity": "Covert",
-      "color": "White"
-    },
-    {
-      "name": "AWP | Dragon Lore",
-      "weapon": "AWP",
-      "collection": "Cobblestone",
-      "rarity": "Covert",
-      "color": "Gold"
-    }
-  ]
-  
+  {
+    "name": "Karambit | Fade",
+    "type": "Knife",
+    "rarity": "Covert",
+    "collection": ["Gamma Case ", "Gamma 2 Case"],
+    "float range": "0.00-0.08",
+    "rare patterns": "Yes",
+    "price range": "3000-3999"
+  },
+  {
+    "name": "AK-47 | Fire Serpent",
+    "type": "Rifle",
+    "rarity": "Covert",
+    "collection": ["Operation Bravo Case"],
+    "float range": "0.06-0.76",
+    "rare patterns": "No",
+    "price range": "2000-2999"
+  },
+  {
+    "name": "AWP | Dragon Lore",
+    "type": "Sniper Rifle",
+    "rarity": "Covert",
+    "collection": ["Cobblestone Collection"],
+    "float range": "0.00-0.07",
+    "rare patterns": "No",
+    "price range": "5000+"
+  },
+  {
+    "name": "M4A4 | Howl",
+    "type": "Rifle",
+    "rarity": "Contraband",
+    "collection": ["None (Removed)"],
+    "float range": "0.00-0.40",
+    "rare patterns": "No",
+    "price range": "5000+"
+  },
+  {
+    "name": "Desert Eagle | Blaze",
+    "type": "Pistol",
+    "rarity": "Restricted",
+    "collection": ["Dust Collection"],
+    "float range": "0.00-0.08",
+    "rare patterns": "No",
+    "price range": "750-1249"
+  }
+]
